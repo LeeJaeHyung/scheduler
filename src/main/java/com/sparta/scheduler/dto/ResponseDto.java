@@ -1,11 +1,13 @@
 package com.sparta.scheduler.dto;
 
 import com.sparta.scheduler.entity.Schedule;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Getter
+@AllArgsConstructor
 public class ResponseDto {
 
     private long id;
@@ -15,11 +17,13 @@ public class ResponseDto {
     private Date date;
 
 
-    public ResponseDto(Schedule saveSchedule) {
-        this.id = saveSchedule.getId();
-        this.title = saveSchedule.getTitle();
-        this.contents = saveSchedule.getContents();
-        this.head = saveSchedule.getHead();
-        this.date = saveSchedule.getDate();
+    public ResponseDto(Schedule schedule) {
+        this.id = schedule.getId();
+        this.title = schedule.getTitle();
+        this.contents = schedule.getContents();
+        this.head = schedule.getHead();
+        this.date = schedule.getDate();
     }
+
+
 }
