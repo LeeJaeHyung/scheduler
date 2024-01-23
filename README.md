@@ -15,8 +15,9 @@ ERD :
 UseCase : 
 
 
-![image](https://github.com/LeeJaeHyung/scheduler/assets/69907023/e166bbec-6e98-4138-9ec8-657793af4eb0)
 
+
+![usercase](https://github.com/LeeJaeHyung/scheduler/assets/69907023/00bdd672-c301-4789-996d-bc939386fb34)
 
       
 
