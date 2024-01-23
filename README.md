@@ -17,7 +17,8 @@ UseCase :
 
 
 
-![usercase](https://github.com/LeeJaeHyung/scheduler/assets/69907023/00bdd672-c301-4789-996d-bc939386fb34)
+
+![usercase](https://github.com/LeeJaeHyung/scheduler/assets/69907023/13941c88-5e6e-425e-8740-76bdccffb5fd)
 
       
 
