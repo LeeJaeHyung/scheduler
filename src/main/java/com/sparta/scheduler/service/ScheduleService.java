@@ -8,6 +8,7 @@ import com.sparta.scheduler.entity.Schedule;
 import com.sparta.scheduler.repository.ScheduleRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class ScheduleService {
@@ -30,10 +31,12 @@ public class ScheduleService {
     }
 
     public List<ResponseDto> getSchedule() {
-        return repository.findAll();
+        List<ResponseDto> list =  repository.findAll();
+        return list.stream()
+                .sorted(Comparator.comparing(ResponseDto::getDate)).toList().reversed();
     }
 
-    public Long updateSchedule(Long id, RequestDto requestDto) {
+    public ResponseDto updateSchedule(Long id, RequestDto requestDto){
         // 해당 메모가 DB에 존재하는지 확인
         Schedule schedule = repository.findById(id);
         if (schedule != null) {
@@ -41,9 +44,12 @@ public class ScheduleService {
             schedule.setTitle(requestDto.getTitle());
             schedule.setContents(requestDto.getContents());
             schedule.setHead(requestDto.getHead());
-            repository.update(id, schedule);
-
-            return id;
+            int result = repository.update(id, schedule);
+            if(result==1){
+                return new ResponseDto(schedule);
+            }else{
+                throw new IllegalArgumentException("업데이트 실패");
+            }
         } else {
             throw new IllegalArgumentException("선택한 일정이 존재하지 않습니다.");
         }
@@ -59,5 +65,9 @@ public class ScheduleService {
         } else {
             throw new IllegalArgumentException("선택한 일정이 존재하지 않습니다.");
         }
+    }
+
+    public ResponseDto getScheduleById(Long id) {
+        return new ResponseDto(repository.findById(id));
     }
 }

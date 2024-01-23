@@ -41,11 +41,16 @@ public class SchedulerController {
         return scheduleService.getSchedule();
     }
 
+    @GetMapping("/schedule/{id}")
+    public ResponseDto getScheduleById(@PathVariable Long id){
+        return scheduleService.getScheduleById(id);
+    }
+
     @PutMapping("/schedule/{id}")
-    public Long updateSchedule(@PathVariable Long id, @RequestBody RequestDto requestDto) {
+    public ResponseDto updateSchedule(@PathVariable Long id, @RequestBody RequestDto requestDto) {
 
         PasswordResponseDto passwordResponseDto = passwordService.getPassword(id);
-        if(passwordResponseDto != null&&passwordResponseDto.getPassword().equals(requestDto.getPassword())) {
+        if(passwordResponseDto != null&&requestDto != null&&passwordResponseDto.getPassword().equals(requestDto.getPassword())) {
             return scheduleService.updateSchedule(id, requestDto);
         }else{
             throw new IllegalArgumentException("비밀번호를 확인해 주세요!.");

@@ -58,6 +58,10 @@ public class ScheduleRepository {
         });
     }
 
+    public List<ResponseDto> sortList(List<ResponseDto> responseDto){
+        return responseDto;
+    }
+
     public Schedule findById(Long id) {
         // DB 조회
         String sql = "SELECT * FROM SCHEDULE WHERE id = ?";
@@ -77,13 +81,13 @@ public class ScheduleRepository {
         }, id);
     }
 
-    public void delete(Long id) {
+    public int delete(Long id) {
         String sql = "DELETE FROM SCHEDULE WHERE id = ?";
-        jdbcTemplate.update(sql, id);
+        return jdbcTemplate.update(sql, id);
     }
 
-    public void update(Long id, Schedule schedule) {
+    public int update(Long id, Schedule schedule) {
         String sql = "UPDATE SCHEDULE SET title = ?, contents = ?, head = ?, date = NOW() WHERE id = ?";
-        jdbcTemplate.update(sql, schedule.getTitle(), schedule.getContents(), schedule.getHead() ,id);
+        return jdbcTemplate.update(sql, schedule.getTitle(), schedule.getContents(), schedule.getHead() ,id);
     }
 }
